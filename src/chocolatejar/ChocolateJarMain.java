@@ -53,6 +53,7 @@ public class ChocolateJarMain {
 				break;
 			}
 			
+			time++;																//회수 증가
 		}
 	}
 }
