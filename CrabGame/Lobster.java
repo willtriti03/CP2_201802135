@@ -33,6 +33,8 @@ public class Lobster extends Actor
     {
         // 만약 모서리에 있다면
         // 17정도 회전
+         if(isAtEdge())
+            turn(17);
     }
     
     /**
