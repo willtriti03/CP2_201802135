@@ -3,6 +3,10 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,6 +24,7 @@ public class InterestCalculator extends JFrame {
 	private JLabel l1, l2;
 	private JButton button;
 	private JTextField money, rate, result;
+	private int i_money,i_rate;
 	/**
 	 * Launch the application.
 	 */
@@ -77,18 +82,81 @@ public class InterestCalculator extends JFrame {
 		result.setHorizontalAlignment(SwingConstants.CENTER);
 		p4.add(result);
 
-		
-		
 		p5 = new JPanel();										//모든 판넬을 부모 판넬에 부착
 		p5.setLayout(new BoxLayout(p5, BoxLayout.Y_AXIS));
 		p5.add(p1);
 		p5.add(p2);
 		p5.add(p3);
 		p5.add(p4);
+		
+
+		rate.addKeyListener(new TextFieldEnter());
+		button.addActionListener(new ActionListener() {										//버튼으로 처리
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(money.getText().equals("")) {
+					i_money = 0;
+				}
+				else {
+					i_money = Integer.valueOf(money.getText());
+				}
+				
+				if(money.getText().equals("")) {
+					i_rate = 0;
+				}
+				else {
+					i_rate = Integer.valueOf(rate.getText());
+				}
+				
+				result.setText(("이자는 연 "+(float)(i_money*(i_rate/100)))+"원 입니다.");
+			}
+		});
 
 		getContentPane().add(p5);
 		pack();
 		setVisible(true);
+		
+		
+	}
+	
+	private class TextFieldEnter implements KeyListener{							//텍스트창에서의 입력 처리
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getKeyCode()== KeyEvent.VK_ENTER) {
+				if(money.getText().equals("")) {
+					i_money = 0;
+				}
+				else {
+					i_money = Integer.valueOf(money.getText());
+				}
+				
+				if(money.getText().equals("")) {
+					i_rate = 0;
+				}
+				else {
+					i_rate = Integer.valueOf(rate.getText());
+				}
+				
+				result.setText(("이자는 연 "+(float)(i_money*(i_rate/100)))+"원 입니다.");
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 }
